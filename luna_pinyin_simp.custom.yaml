@@ -1,0 +1,6 @@
+patch:
+    "recognizer/patterns/punct": "i([A-Z|a-z]*|[0-9]|10)$"
+    "switches/@0/reset": 1
+    "punctuator/import_preset": lexur_symbols
+    'engine/translators/+':
+        - lua_translator@date_translator
