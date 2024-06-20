@@ -1,21 +1,34 @@
 # 快捷键设置
 patch:
-  switches:
-    - name: ascii_mode
-      reset: 1
-      states: [ 中文, 西文 ]
-  menu/page_switch:
-    toggle_immediately: true
-  switch_key:
-    Shift+space: commit_code
-    Shift_R: commit_code
-  key_binder:
-    bindings:
-      # 快捷键修改
-      - {  accept: Control+Shift+1  , when: never                             }
-      - {  accept: minus            , send: Page_Up        , when: has_menu   }
-      - {  accept: equal            , send: Page_Down      , when: has_menu   }
-      - {  accept: "Shift+Tab"      , send: "Shift+Left"   , when: composing  }
-      - {  accept: Tab              , send: "Shift+Right"  , when: composing  }
-      - {  accept: "Alt+Left"       , send: "Shift+Left"   , when: composing  }
-      - {  accept: "Alt+Right"      , send: "Shift+Right"  , when: composing  }
+    switches:
+        - name: ascii_mode # 候选词个数
+          reset: 1
+          states: [中文, 西文]
+    menu:
+        page_size: 5
+        page_switch:
+            toggle_immediately: true
+    # 切换中英：
+    # 不同的选项表示：打字打到一半时按下了 CapsLock、Shift、Control 后：
+    # commit_code  上屏原始的编码，然后切换到英文
+    # commit_text  上屏拼出的词句，然后切换到英文
+    # clear        清除未上屏内容，然后切换到英文
+    # inline_ascii 无输入时，切换中英；有输入时，切换到临时英文模式，按回车上屏后回到中文状态
+    # noop         屏蔽快捷键，不切换中英，但不要屏蔽 CapsLock
+    ascii_composer:
+        switch_key:
+            Caps_Lock: clear # commit_code | commit_text | clear
+            Shift_L: clear # commit_code | commit_text | inline_ascii | clear | noop
+            Shift_R: clear # commit_code | commit_text | inline_ascii | clear | noop
+            Control_L: noop # commit_code | commit_text | inline_ascii | clear | noop
+            Control_R: noop # commit_code | commit_text | inline_ascii | clear | noop
+    key_binder:
+        bindings:
+            # 快捷键修改
+            - { accept: Control+Shift+1, when: never }
+            - { accept: minus, when: has_menu, send: Page_Up }
+            - { accept: equal, when: has_menu, send: Page_Down }
+            - { accept: "Shift+Tab", when: composing, send: "Shift+Left" }
+            - { accept: Tab, when: composing, send: "Shift+Right" }
+            - { accept: "Alt+Left", when: composing, send: "Shift+Left" }
+            - { accept: "Alt+Right", when: composing, send: "Shift+Right" }
