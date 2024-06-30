@@ -32,3 +32,7 @@ patch:
             - { accept: Tab, when: composing, send: "Shift+Right" }
             - { accept: "Alt+Left", when: composing, send: "Shift+Left" }
             - { accept: "Alt+Right", when: composing, send: "Shift+Right" }
+            - { when: has_menu, accept: period, send: commit_code  } # 句号向下翻页
+            - { when: has_menu, accept: comma, send: commit_code } # 逗号向上翻页
+            - { when: has_menu, accept: bracketleft, send: Page_Up } # 句号向下翻页
+            - { when: has_menu, accept: bracketright, send: Page_Down } # 逗号向上翻页
