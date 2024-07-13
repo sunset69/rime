@@ -1,5 +1,8 @@
 # 快捷键设置
 patch:
+    switcher:
+        hotkeys:
+            - Control+Shift+grave
     switches:
         - name: ascii_mode # 候选词个数
           reset: 1
